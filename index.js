@@ -1,6 +1,7 @@
-const { Builder, By, Key, until } = require("selenium-webdriver");
+const { Builder, By, Key, until, Capabilities } = require("selenium-webdriver");
+let capabilities = Capabilities.chrome();
 
-let driver = new Builder().forBrowser("chrome").build();
+let driver = new Builder().usingServer("http://10.33.132.237:4444/wd/hub").withCapabilities(capabilities).build();
 let protocolo;
 let numProtocolo;
 
@@ -8,10 +9,10 @@ let numProtocolo;
 async function login() {
 
 
-    await driver.manage().window().maximize();
-    await driver.manage().logs().get("browser");
+    //await driver.manage().window().maximize();
+    //await driver.manage().logs().get("browser");
 
-    await driver.get("http://homologacao.planejamento.mg.gov.br/")
+    await driver.get("http://10.33.132.120").catch((a) => console.log(a))
 
     let inputLogin = await driver.findElement(By.css("#root > div > div.background-logon > div > div.login.container > div > form > div:nth-child(2) > input"))
     await inputLogin.sendKeys(Key.HOME)
